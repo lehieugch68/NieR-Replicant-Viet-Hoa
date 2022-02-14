@@ -65,6 +65,7 @@ namespace NieR_Replicant_Viet_Hoa
             { "UpToDate", "Cả chương trình và bản dịch đang ở bản mới nhất." },
             { "UpdateApp", "Đã có phiên bản chương trình mới. Bạn muốn cập nhật chứ?" },
             { "UpdateTrans", "Đã có bản dịch mới. Bạn muốn cập nhật chứ?" },
+            { "Changelog", "\n\nThay đổi:\n" },
         };
         #endregion
     }

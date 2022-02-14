@@ -43,40 +43,47 @@ namespace NieR_Replicant_Viet_Hoa
         }
         public static void CheckUpdate(MainUI form)
         {
-            if (!Default._JsonConfig.ContainsKey("TranslationID"))
+            using (var wc = new WebClient())
             {
-                DialogResult confirm = MessageBox.Show(Default._Messages["UpdateTrans"], Default._MessageTitle, MessageBoxButtons.YesNo);
-                if (confirm == DialogResult.Yes)
+                wc.DownloadStringAsync(new Uri(Default._Uri));
+                wc.DownloadStringCompleted += (s, y) =>
                 {
-                    form._BtnUpdate.PerformClick();
-                }
-            }
-            else
-            {
-                using (var wc = new WebClient())
-                {
-                    wc.DownloadStringAsync(new Uri(Default._Uri));
-                    wc.DownloadStringCompleted += (s, y) =>
+                    Dictionary<string, string> json = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(y.Result);
+                    string updateMessage = Default._Messages["UpdateTrans"];
+                    if (json.ContainsKey("Changelog")) updateMessage = $"{updateMessage}{Default._Messages["Changelog"]}{json["Changelog"]}";
+                    if (!Default._JsonConfig.ContainsKey("TranslationID"))
                     {
-                        Dictionary<string, string> json = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(y.Result);
-                        if (json.ContainsKey("TranslationID") && Default._JsonConfig["TranslationID"] != json["TranslationID"])
+                        DialogResult confirm = MessageBox.Show(updateMessage, Default._MessageTitle, MessageBoxButtons.YesNo);
+                        if (confirm == DialogResult.Yes)
                         {
-                            DialogResult confirm = MessageBox.Show(Default._Messages["UpdateTrans"], Default._MessageTitle, MessageBoxButtons.YesNo);
-                            if (confirm == DialogResult.Yes)
-                            {
-                                form._BtnUpdate.PerformClick();
-                            }
+                            form._BtnUpdate.PerformClick();
                         }
+                    }
+                    else
+                    {
+                        string appUpdateMessage = Default._Messages["UpdateApp"];
+                        if (json.ContainsKey("AppChangelog")) appUpdateMessage = $"{appUpdateMessage}{Default._Messages["Changelog"]}{json["AppChangelog"]}";
                         if (json.ContainsKey("AppVersion") && Application.ProductVersion != json["AppVersion"])
                         {
-                            DialogResult confirm = MessageBox.Show(Default._Messages["UpdateApp"], Default._MessageTitle, MessageBoxButtons.YesNo);
+                            DialogResult confirm = MessageBox.Show(appUpdateMessage, Default._MessageTitle, MessageBoxButtons.YesNo);
                             if (confirm == DialogResult.Yes)
                             {
                                 form._BtnUpdate.PerformClick();
                             }
                         }
-                    };
-                }
+                        else
+                        {
+                            if (json.ContainsKey("TranslationID") && Default._JsonConfig["TranslationID"] != json["TranslationID"])
+                            {
+                                DialogResult confirm = MessageBox.Show(updateMessage, Default._MessageTitle, MessageBoxButtons.YesNo);
+                                if (confirm == DialogResult.Yes)
+                                {
+                                    form._BtnUpdate.PerformClick();
+                                }
+                            }
+                        }
+                    }
+                };
             }
         }
         public static void Backup(ProgressManager progress, LogManager log)

@@ -41,7 +41,9 @@ namespace NieR_Replicant_Viet_Hoa
             this.labelTesterTitle = new System.Windows.Forms.Label();
             this.labelProduct = new System.Windows.Forms.Label();
             this.linkVHG = new System.Windows.Forms.LinkLabel();
-            this.labelDescription = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -142,7 +144,7 @@ namespace NieR_Replicant_Viet_Hoa
             // 
             this.labelProduct.AutoSize = true;
             this.labelProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProduct.Location = new System.Drawing.Point(40, 385);
+            this.labelProduct.Location = new System.Drawing.Point(40, 380);
             this.labelProduct.Name = "labelProduct";
             this.labelProduct.Size = new System.Drawing.Size(109, 15);
             this.labelProduct.TabIndex = 13;
@@ -152,7 +154,7 @@ namespace NieR_Replicant_Viet_Hoa
             // 
             this.linkVHG.AutoSize = true;
             this.linkVHG.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkVHG.Location = new System.Drawing.Point(146, 385);
+            this.linkVHG.Location = new System.Drawing.Point(146, 380);
             this.linkVHG.Name = "linkVHG";
             this.linkVHG.Size = new System.Drawing.Size(90, 15);
             this.linkVHG.TabIndex = 14;
@@ -160,23 +162,41 @@ namespace NieR_Replicant_Viet_Hoa
             this.linkVHG.Text = "Việt Hóa Game";
             this.linkVHG.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkVHG_LinkClicked);
             // 
-            // labelDescription
+            // label1
             // 
-            this.labelDescription.AutoSize = true;
-            this.labelDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescription.Location = new System.Drawing.Point(9, 408);
-            this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(261, 39);
-            this.labelDescription.TabIndex = 15;
-            this.labelDescription.Text = "             Đây là bản dịch hoàn toàn miễn phí.\r\nĐể tránh bị chèn mã độc, vui lò" +
-    "ng chỉ tải chương trình\r\ncài đặt NieR Replicant Việt Hóa tại viethoagame.com";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(46, 405);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(179, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Đây là bản dịch hoàn toàn miễn phí.";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 420);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(261, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Để tránh bị chèn mã độc, vui lòng chỉ tải chương trình";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 435);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(260, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "cài đặt NieR Replicant Việt Hóa tại viethoagame.com";
             // 
             // CreditUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 461);
-            this.Controls.Add(this.labelDescription);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.linkVHG);
             this.Controls.Add(this.labelProduct);
             this.Controls.Add(this.labelTesterTitle);
@@ -214,6 +234,8 @@ namespace NieR_Replicant_Viet_Hoa
         private System.Windows.Forms.Label labelTesterTitle;
         private System.Windows.Forms.Label labelProduct;
         private System.Windows.Forms.LinkLabel linkVHG;
-        private System.Windows.Forms.Label labelDescription;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
