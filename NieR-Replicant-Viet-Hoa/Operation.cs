@@ -123,27 +123,18 @@ namespace NieR_Replicant_Viet_Hoa
                 };
                 if (Application.ProductVersion != json["AppVersion"])
                 {
-                    DialogResult confirm = MessageBox.Show(Default._Messages["UpdateApp"], Default._MessageTitle, MessageBoxButtons.YesNo);
-                    if (confirm == DialogResult.Yes)
+                    if (File.Exists(Default._AppUpdate))
                     {
-                        if (File.Exists(Default._AppUpdate))
-                        {
-                            Process.Start(Default._AppUpdate);
-                            Application.Exit();
-                        }
-                        else
-                        {
-                            Uri uri = new Uri(json["UpdateUrl"]);
-                            log.Push(Default._Messages["Begin"].Replace("{Action}", "tải chương trình cập nhật"));
-                            await wc.DownloadFileTaskAsync(uri, Default._AppUpdate);
-                            Process.Start(Default._AppUpdate);
-                            Application.Exit();
-                        }
-                    } 
+                        Process.Start(Default._AppUpdate);
+                        Application.Exit();
+                    }
                     else
                     {
-                        log.Push(Default._Messages["Cancel"].Replace("{Action}", "cập nhật"));
-                        return;
+                        Uri uri = new Uri(json["UpdateUrl"]);
+                        log.Push(Default._Messages["Begin"].Replace("{Action}", "tải chương trình cập nhật"));
+                        await wc.DownloadFileTaskAsync(uri, Default._AppUpdate);
+                        Process.Start(Default._AppUpdate);
+                        Application.Exit();
                     }
                 }
                 if (!Default._JsonConfig.ContainsKey("TranslationID") || json["TranslationID"] != Default._JsonConfig["TranslationID"] || !File.Exists(Default._Resources) || ReadID() != json["TranslationID"])
