@@ -103,10 +103,11 @@ namespace NieR_Replicant_Viet_Hoa
 
                     if (!string.IsNullOrWhiteSpace(steamPath))
                     {
-                        string steamGameInfo = Path.Combine(steamPath, "steamapps", "appmanifest_292120.acf");
+                        string steamGameInfo = Path.Combine(steamPath, "steamapps", "appmanifest_1113560.acf");
                         if (File.Exists(steamGameInfo))
                         {
                             textBoxGameLocation.Text = Path.Combine(steamPath, "steamapps", "common", "NieR Replicant ver.1.22474487139");
+                            Default._JsonConfig.Add("GameLocation", textBoxGameLocation.Text);
                         }
                         else
                         {
@@ -114,21 +115,19 @@ namespace NieR_Replicant_Viet_Hoa
                             if (File.Exists(libraryFolders))
                             {
                                 string libContent = File.ReadAllText(libraryFolders);
-                                MatchCollection result = Regex.Matches(libContent, "\\\"([0-9])\\\"\t\t\\\"(.+)\\\"");
+                                MatchCollection result = Regex.Matches(libContent, "\"path\"(.+)\"(.+)\"");
                                 for (int i = 0; i < result.Count; i++)
                                 {
-                                    steamGameInfo = Path.Combine(result[i].Groups[2].Value, "steamapps", "appmanifest_1113560.acf");
+                                    steamGameInfo = Path.Combine(result[i].Groups[2].Value.Replace(@":\\", @":\"), "steamapps", "appmanifest_1113560.acf");
                                     if (File.Exists(steamGameInfo))
                                     {
-                                        textBoxGameLocation.Text = Path.Combine(result[i].Groups[2].Value, "steamapps", "common", "NieR Replicant ver.1.22474487139");
+                                        textBoxGameLocation.Text = Path.Combine(Path.GetDirectoryName(steamGameInfo), "common", "NieR Replicant ver.1.22474487139");
+                                        Default._JsonConfig.Add("GameLocation", textBoxGameLocation.Text);
                                         break;
                                     }
                                 }
                             }
                         }
-                        Default._JsonConfig.Add("GameLocation", textBoxGameLocation.Text);
-                        string config = new JavaScriptSerializer().Serialize(Default._JsonConfig);
-                        File.WriteAllText(Default._ConfigFile, config);
                     }
                 }
             }

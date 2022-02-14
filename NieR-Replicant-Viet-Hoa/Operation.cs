@@ -153,6 +153,7 @@ namespace NieR_Replicant_Viet_Hoa
                     if (Default._JsonConfig.ContainsKey("TranslationID")) Default._JsonConfig["TranslationID"] = json["TranslationID"];
                     else Default._JsonConfig.Add("TranslationID", json["TranslationID"]);
                     UpdateConfig();
+                    if (Default._JsonConfig.ContainsKey("GameLocation") && Directory.Exists(Path.Combine(Default._JsonConfig["GameLocation"], Default._PatchDirectory))) Install(progress, log);
                 }
             }
         }
