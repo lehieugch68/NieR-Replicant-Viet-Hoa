@@ -48,7 +48,7 @@ namespace NieR_Replicant_Viet_Hoa
             { "InvalidID", "Đã xảy ra lỗi: ID không hợp lệ.\n\nVui lòng cập nhật bản dịch." },
             { "UninstallFailed", "Đã xảy ra lỗi: Gỡ cài đặt thất bại.\n\nCó thể Việt Hóa đã được gỡ cài đặt, hoặc trong quá trình gỡ bị tắt đột ngột, xảy ra sự cố." },
             { "FreeSpace", "Cảnh báo:\n\nĐể cài đặt Việt Hóa, ổ đĩa cần trống khoảng 40GB.\nỔ đĩa của bạn còn trống {TotalFreeSpace}GB. Tiếp tục chứ?" },
-            { "BeginInstall", "Bắt đầu cài đặt, vui lòng không tắt chương trình. Nếu gặp sự cố hoặc tắt chương trình đột ngột, vui lòng xóa thư mục {PatchDirectory} và cài đặt lại." },
+            { "BeginInstall", "Bắt đầu cài đặt, vui lòng không tắt chương trình.\nNếu gặp sự cố hoặc tắt chương trình đột ngột, hãy xóa thư mục {PatchDirectory} và cài đặt lại.\nBản dịch được thực hiện bởi Việt Hóa Game và hoàn toàn miễn phí. Vui lòng chỉ tải chương trình ở viethoagame.com để tránh bị chèn mã độc." },
             { "BeginUninstall", "Bắt đầu gỡ cài đặt, vui lòng không tắt chương trình." },
             { "UnpackData", "Đang giải nén {Item}. Tổng: {FileCount} tệp." },
             { "Cancel", "Dừng {Action}." },
@@ -64,6 +64,7 @@ namespace NieR_Replicant_Viet_Hoa
             { "AppVersion", "Phiên bản chương trình: {Version}" },
             { "UpToDate", "Cả chương trình và bản dịch đang ở bản mới nhất." },
             { "UpdateApp", "Đã có phiên bản chương trình mới. Bạn muốn cập nhật chứ?" },
+            { "UpdateTrans", "Đã có bản dịch mới. Bạn muốn cập nhật chứ?" },
         };
         #endregion
     }

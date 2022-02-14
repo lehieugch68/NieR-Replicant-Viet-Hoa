@@ -15,11 +15,22 @@ namespace NieR_Replicant_Viet_Hoa
         {
             _Log = listBox;
         }
-        public void Push(string content)
+        public void Push(string content, bool log = false)
         {
             _Log.BeginInvoke((MethodInvoker)delegate
             {
-                _Log.Items.Add(content);
+                if (log)
+                {
+                    string[] lines = content.Split(new string[] { "\n" }, StringSplitOptions.None);
+                    foreach (string line in lines)
+                    {
+                        _Log.Items.Add(line);
+                    }
+                }
+                else
+                {
+                    _Log.Items.Add(content);
+                }
                 _Log.SelectedIndex = _Log.Items.Count - 1;
                 _Log.SelectedIndex = -1;
             });

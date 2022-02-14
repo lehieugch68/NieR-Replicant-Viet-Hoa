@@ -41,6 +41,7 @@ namespace NieR_Replicant_Viet_Hoa
             this.labelTesterTitle = new System.Windows.Forms.Label();
             this.labelProduct = new System.Windows.Forms.Label();
             this.linkVHG = new System.Windows.Forms.LinkLabel();
+            this.labelDescription = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -159,11 +160,23 @@ namespace NieR_Replicant_Viet_Hoa
             this.linkVHG.Text = "Việt Hóa Game";
             this.linkVHG.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkVHG_LinkClicked);
             // 
+            // labelDescription
+            // 
+            this.labelDescription.AutoSize = true;
+            this.labelDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDescription.Location = new System.Drawing.Point(9, 408);
+            this.labelDescription.Name = "labelDescription";
+            this.labelDescription.Size = new System.Drawing.Size(261, 39);
+            this.labelDescription.TabIndex = 15;
+            this.labelDescription.Text = "             Đây là bản dịch hoàn toàn miễn phí.\r\nĐể tránh bị chèn mã độc, vui lò" +
+    "ng chỉ tải chương trình\r\ncài đặt NieR Replicant Việt Hóa tại viethoagame.com";
+            // 
             // CreditUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 411);
+            this.ClientSize = new System.Drawing.Size(284, 461);
+            this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.linkVHG);
             this.Controls.Add(this.labelProduct);
             this.Controls.Add(this.labelTesterTitle);
@@ -177,8 +190,8 @@ namespace NieR_Replicant_Viet_Hoa
             this.Controls.Add(this.pictureBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(300, 450);
-            this.MinimumSize = new System.Drawing.Size(300, 450);
+            this.MaximumSize = new System.Drawing.Size(300, 500);
+            this.MinimumSize = new System.Drawing.Size(300, 500);
             this.Name = "CreditUI";
             this.Text = "Thông tin";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreditUI_FormClosing);
@@ -201,5 +214,6 @@ namespace NieR_Replicant_Viet_Hoa
         private System.Windows.Forms.Label labelTesterTitle;
         private System.Windows.Forms.Label labelProduct;
         private System.Windows.Forms.LinkLabel linkVHG;
+        private System.Windows.Forms.Label labelDescription;
     }
 }

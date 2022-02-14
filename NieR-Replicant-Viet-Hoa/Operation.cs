@@ -41,6 +41,44 @@ namespace NieR_Replicant_Viet_Hoa
                 MoveDirectory(folder, Path.Combine(des, Path.GetFileName(folder)));
             }
         }
+        public static void CheckUpdate(MainUI form)
+        {
+            if (!Default._JsonConfig.ContainsKey("TranslationID"))
+            {
+                DialogResult confirm = MessageBox.Show(Default._Messages["UpdateTrans"], Default._MessageTitle, MessageBoxButtons.YesNo);
+                if (confirm == DialogResult.Yes)
+                {
+                    form._BtnUpdate.PerformClick();
+                }
+            }
+            else
+            {
+                using (var wc = new WebClient())
+                {
+                    wc.DownloadStringAsync(new Uri(Default._Uri));
+                    wc.DownloadStringCompleted += (s, y) =>
+                    {
+                        Dictionary<string, string> json = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(y.Result);
+                        if (json.ContainsKey("TranslationID") && Default._JsonConfig["TranslationID"] != json["TranslationID"])
+                        {
+                            DialogResult confirm = MessageBox.Show(Default._Messages["UpdateTrans"], Default._MessageTitle, MessageBoxButtons.YesNo);
+                            if (confirm == DialogResult.Yes)
+                            {
+                                form._BtnUpdate.PerformClick();
+                            }
+                        }
+                        if (json.ContainsKey("AppVersion") && Application.ProductVersion != json["AppVersion"])
+                        {
+                            DialogResult confirm = MessageBox.Show(Default._Messages["UpdateApp"], Default._MessageTitle, MessageBoxButtons.YesNo);
+                            if (confirm == DialogResult.Yes)
+                            {
+                                form._BtnUpdate.PerformClick();
+                            }
+                        }
+                    };
+                }
+            }
+        }
         public static void Backup(ProgressManager progress, LogManager log)
         {
             progress.Begin();
@@ -148,7 +186,7 @@ namespace NieR_Replicant_Viet_Hoa
                 {
                     log.Clear();
                     progress.Begin();
-                    log.Push(Default._Messages["BeginInstall"].Replace("{PatchDirectory}", Default._PatchDirectory));
+                    log.Push(Default._Messages["BeginInstall"].Replace("{PatchDirectory}", Default._PatchDirectory), true);
                     Unpacker unpacker = new Unpacker(Default._JsonConfig["GameLocation"]);
                     unpacker.Unpack(Path.Combine(Default._JsonConfig["GameLocation"], Default._PatchDirectory), "data", progress, log);
                     unpacker.Unpack(Path.Combine(Default._JsonConfig["GameLocation"], Default._PatchDirectory), @"dlc\dlc01", progress, log);

@@ -175,6 +175,7 @@ namespace NieR_Replicant_Viet_Hoa
             this.Name = "MainUI";
             this.Text = "NieR Replicant™ ver.1.22474487139... Việt Hóa";
             this.Load += new System.EventHandler(this.MainUI_Load);
+            this.Shown += new System.EventHandler(this.MainUI_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

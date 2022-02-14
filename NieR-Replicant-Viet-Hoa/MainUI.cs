@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Web.Script.Serialization;
+using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace NieR_Replicant_Viet_Hoa
 {
@@ -18,6 +20,10 @@ namespace NieR_Replicant_Viet_Hoa
         public MainUI()
         {
             InitializeComponent();
+        }
+        public Button _BtnUpdate
+        {
+            get { return this.btnUpdate; }
         }
         private void textBoxGameLocation_DragEnter(object sender, DragEventArgs e)
         {
@@ -86,9 +92,44 @@ namespace NieR_Replicant_Viet_Hoa
             try
             {
                 Default._JsonConfig = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(File.ReadAllText(Default._ConfigFile));
-                if (Default._JsonConfig.ContainsKey("GameLocation") && !string.IsNullOrEmpty(Default._JsonConfig["GameLocation"]) && !string.IsNullOrWhiteSpace(Default._JsonConfig["GameLocation"]))
+                if (Default._JsonConfig.ContainsKey("GameLocation"))
                 {
                     textBoxGameLocation.Text = Default._JsonConfig["GameLocation"];
+                }
+                else
+                {
+                    string registryPath = @"SOFTWARE\Wow6432Node\Valve\Steam";
+                    string steamPath = Registry.LocalMachine.OpenSubKey(registryPath).GetValue("InstallPath")?.ToString();
+
+                    if (!string.IsNullOrWhiteSpace(steamPath))
+                    {
+                        string steamGameInfo = Path.Combine(steamPath, "steamapps", "appmanifest_292120.acf");
+                        if (File.Exists(steamGameInfo))
+                        {
+                            textBoxGameLocation.Text = Path.Combine(steamPath, "steamapps", "common", "NieR Replicant ver.1.22474487139");
+                        }
+                        else
+                        {
+                            string libraryFolders = Path.Combine(steamPath, "steamapps", "libraryfolders.vdf");
+                            if (File.Exists(libraryFolders))
+                            {
+                                string libContent = File.ReadAllText(libraryFolders);
+                                MatchCollection result = Regex.Matches(libContent, "\\\"([0-9])\\\"\t\t\\\"(.+)\\\"");
+                                for (int i = 0; i < result.Count; i++)
+                                {
+                                    steamGameInfo = Path.Combine(result[i].Groups[2].Value, "steamapps", "appmanifest_1113560.acf");
+                                    if (File.Exists(steamGameInfo))
+                                    {
+                                        textBoxGameLocation.Text = Path.Combine(result[i].Groups[2].Value, "steamapps", "common", "NieR Replicant ver.1.22474487139");
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        Default._JsonConfig.Add("GameLocation", textBoxGameLocation.Text);
+                        string config = new JavaScriptSerializer().Serialize(Default._JsonConfig);
+                        File.WriteAllText(Default._ConfigFile, config);
+                    }
                 }
             }
             catch (Exception err)
@@ -218,6 +259,15 @@ namespace NieR_Replicant_Viet_Hoa
             e.DrawBackground();
             e.DrawFocusRectangle();
             e.Graphics.DrawString(listBoxLog.Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds);
+        }
+
+        private void MainUI_Shown(object sender, EventArgs e)
+        {
+            try
+            {
+                Operation.CheckUpdate(this);
+            }
+            catch { }
         }
     }
 }
