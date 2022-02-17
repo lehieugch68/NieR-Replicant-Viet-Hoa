@@ -119,6 +119,7 @@ namespace NieR_Replicant_Viet_Hoa
                 Dictionary<string, string> json = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(jsonData);
                 log.Push(Default._Messages["AppVersion"].Replace("{Version}", json["AppVersion"]));
                 log.Push(Default._Messages["TranslationID"].Replace("{ID}", json["TranslationID"]));
+                log.Push(Default._Messages["UpdateTime"].Replace("{Date}", ConvertFromUnixTimestamp(long.Parse(json["TranslationID"]))));
                 if (Default._JsonConfig.ContainsKey("TranslationID")  && Application.ProductVersion == json["AppVersion"] && json["TranslationID"] == Default._JsonConfig["TranslationID"] && File.Exists(Default._Resources) && ReadID() == json["TranslationID"])
                 {
                     log.Push(Default._Messages["UpToDate"]);
@@ -155,6 +156,11 @@ namespace NieR_Replicant_Viet_Hoa
                     UpdateConfig();
                 }
             }
+        }
+        public static string ConvertFromUnixTimestamp(long timestamp, string format = "dd/MM/yyyy")
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timestamp).ToLocalTime().ToString(format);
         }
         public static void UpdateConfig()
         {

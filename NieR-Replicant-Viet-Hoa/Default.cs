@@ -62,6 +62,7 @@ namespace NieR_Replicant_Viet_Hoa
             { "InProgress", "Đã xảy ra lỗi: Đang dở tiến trình khác.\n\nVui lòng đợi." },
             { "TranslationID", "ID bản dịch: {ID}" },
             { "AppVersion", "Phiên bản chương trình: {Version}" },
+            { "UpdateTime", "Cập nhật ngày: {Date}."},
             { "UpToDate", "Cả chương trình và bản dịch đang ở bản mới nhất." },
             { "UpdateApp", "Đã có phiên bản chương trình mới. Bạn muốn cập nhật chứ?" },
             { "UpdateTrans", "Đã có bản dịch mới. Bạn muốn cập nhật chứ?" },
