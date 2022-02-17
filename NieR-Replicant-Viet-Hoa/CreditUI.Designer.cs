@@ -37,7 +37,6 @@ namespace NieR_Replicant_Viet_Hoa
             this.linkDC = new System.Windows.Forms.LinkLabel();
             this.linkLH = new System.Windows.Forms.LinkLabel();
             this.linkLH2 = new System.Windows.Forms.LinkLabel();
-            this.linkOb = new System.Windows.Forms.LinkLabel();
             this.labelTesterTitle = new System.Windows.Forms.Label();
             this.labelProduct = new System.Windows.Forms.Label();
             this.linkVHG = new System.Windows.Forms.LinkLabel();
@@ -111,24 +110,13 @@ namespace NieR_Replicant_Viet_Hoa
             // linkLH2
             // 
             this.linkLH2.AutoSize = true;
-            this.linkLH2.Location = new System.Drawing.Point(185, 200);
+            this.linkLH2.Location = new System.Drawing.Point(182, 209);
             this.linkLH2.Name = "linkLH2";
             this.linkLH2.Size = new System.Drawing.Size(44, 13);
             this.linkLH2.TabIndex = 10;
             this.linkLH2.TabStop = true;
             this.linkLH2.Text = "Lê Hiếu";
             this.linkLH2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLH2_LinkClicked);
-            // 
-            // linkOb
-            // 
-            this.linkOb.AutoSize = true;
-            this.linkOb.Location = new System.Drawing.Point(185, 222);
-            this.linkOb.Name = "linkOb";
-            this.linkOb.Size = new System.Drawing.Size(45, 13);
-            this.linkOb.TabIndex = 11;
-            this.linkOb.TabStop = true;
-            this.linkOb.Text = "Oblivion";
-            this.linkOb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkOb_LinkClicked);
             // 
             // labelTesterTitle
             // 
@@ -200,7 +188,6 @@ namespace NieR_Replicant_Viet_Hoa
             this.Controls.Add(this.linkVHG);
             this.Controls.Add(this.labelProduct);
             this.Controls.Add(this.labelTesterTitle);
-            this.Controls.Add(this.linkOb);
             this.Controls.Add(this.linkLH2);
             this.Controls.Add(this.linkLH);
             this.Controls.Add(this.linkDC);
@@ -230,7 +217,6 @@ namespace NieR_Replicant_Viet_Hoa
         private System.Windows.Forms.LinkLabel linkDC;
         private System.Windows.Forms.LinkLabel linkLH;
         private System.Windows.Forms.LinkLabel linkLH2;
-        private System.Windows.Forms.LinkLabel linkOb;
         private System.Windows.Forms.Label labelTesterTitle;
         private System.Windows.Forms.Label labelProduct;
         private System.Windows.Forms.LinkLabel linkVHG;
