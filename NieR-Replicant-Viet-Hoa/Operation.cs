@@ -339,10 +339,17 @@ namespace NieR_Replicant_Viet_Hoa
             }
             progress.Finish();
         }
-        public static bool CheckDirectory()
+        public static bool CheckDirectory(string root = "")
         {
-            if (!Default._JsonConfig.ContainsKey("GameLocation")) return false;
-            bool exe = File.Exists(Path.Combine(Default._JsonConfig["GameLocation"], Default._ExeFile));
+            bool exe = false;
+            if (Default._JsonConfig.ContainsKey("GameLocation") && root.Length < 1)
+            {
+                exe = File.Exists(Path.Combine(Default._JsonConfig["GameLocation"], Default._ExeFile));
+            }
+            else
+            {
+                exe = File.Exists(Path.Combine(root, Default._ExeFile));
+            }   
             return exe;
         }
     }

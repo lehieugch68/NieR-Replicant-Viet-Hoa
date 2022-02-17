@@ -106,8 +106,12 @@ namespace NieR_Replicant_Viet_Hoa
                         string steamGameInfo = Path.Combine(steamPath, "steamapps", "appmanifest_1113560.acf");
                         if (File.Exists(steamGameInfo))
                         {
-                            textBoxGameLocation.Text = Path.Combine(steamPath, "steamapps", "common", "NieR Replicant ver.1.22474487139");
-                            Default._JsonConfig.Add("GameLocation", textBoxGameLocation.Text);
+                            string gameLocation = Path.Combine(steamPath, "steamapps", "common", "NieR Replicant ver.1.22474487139");
+                            if (Directory.Exists(gameLocation) && Operation.CheckDirectory(gameLocation))
+                            {
+                                textBoxGameLocation.Text = gameLocation;
+                                Default._JsonConfig.Add("GameLocation", textBoxGameLocation.Text);
+                            }
                         }
                         else
                         {
@@ -121,9 +125,13 @@ namespace NieR_Replicant_Viet_Hoa
                                     steamGameInfo = Path.Combine(result[i].Groups[2].Value.Replace(@":\\", @":\"), "steamapps", "appmanifest_1113560.acf");
                                     if (File.Exists(steamGameInfo))
                                     {
-                                        textBoxGameLocation.Text = Path.Combine(Path.GetDirectoryName(steamGameInfo), "common", "NieR Replicant ver.1.22474487139");
-                                        Default._JsonConfig.Add("GameLocation", textBoxGameLocation.Text);
-                                        break;
+                                        string gameLocation = Path.Combine(steamPath, "steamapps", "common", "NieR Replicant ver.1.22474487139");
+                                        if (Directory.Exists(gameLocation) && Operation.CheckDirectory(gameLocation))
+                                        {
+                                            textBoxGameLocation.Text = gameLocation;
+                                            Default._JsonConfig.Add("GameLocation", textBoxGameLocation.Text);
+                                            break;
+                                        }
                                     }
                                 }
                             }
