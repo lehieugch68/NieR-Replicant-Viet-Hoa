@@ -100,7 +100,6 @@ namespace NieR_Replicant_Viet_Hoa
                 {
                     string registryPath = @"SOFTWARE\Wow6432Node\Valve\Steam";
                     string steamPath = Registry.LocalMachine.OpenSubKey(registryPath).GetValue("InstallPath")?.ToString();
-
                     if (!string.IsNullOrWhiteSpace(steamPath))
                     {
                         string steamGameInfo = Path.Combine(steamPath, "steamapps", "appmanifest_1113560.acf");
@@ -125,7 +124,8 @@ namespace NieR_Replicant_Viet_Hoa
                                     steamGameInfo = Path.Combine(result[i].Groups[2].Value.Replace(@":\\", @":\"), "steamapps", "appmanifest_1113560.acf");
                                     if (File.Exists(steamGameInfo))
                                     {
-                                        string gameLocation = Path.Combine(steamPath, "steamapps", "common", "NieR Replicant ver.1.22474487139");
+                                        string gameLocation = Path.Combine(Path.GetDirectoryName(steamGameInfo), "common", "NieR Replicant ver.1.22474487139");
+                                        
                                         if (Directory.Exists(gameLocation) && Operation.CheckDirectory(gameLocation))
                                         {
                                             textBoxGameLocation.Text = gameLocation;

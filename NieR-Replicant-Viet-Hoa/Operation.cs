@@ -341,16 +341,14 @@ namespace NieR_Replicant_Viet_Hoa
         }
         public static bool CheckDirectory(string root = "")
         {
-            bool exe = false;
             if (Default._JsonConfig.ContainsKey("GameLocation") && root.Length < 1)
             {
-                exe = File.Exists(Path.Combine(Default._JsonConfig["GameLocation"], Default._ExeFile));
+                return File.Exists(Path.Combine(Default._JsonConfig["GameLocation"], Default._ExeFile));
             }
             else
             {
-                exe = File.Exists(Path.Combine(root, Default._ExeFile));
+                return File.Exists(Path.Combine(root, Default._ExeFile));
             }   
-            return exe;
         }
     }
 }
