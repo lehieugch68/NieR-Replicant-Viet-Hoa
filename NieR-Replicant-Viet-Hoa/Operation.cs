@@ -28,6 +28,7 @@ namespace NieR_Replicant_Viet_Hoa
         }
         private static void MoveDirectory(string source, string des)
         {
+            if (!Directory.Exists(source)) return;
             if (!Directory.Exists(des)) Directory.CreateDirectory(des);
             string[] files = Directory.GetFiles(source, "*.*", SearchOption.TopDirectoryOnly);
             foreach (string file in files)
@@ -95,6 +96,7 @@ namespace NieR_Replicant_Viet_Hoa
             double percent = 100.0 / (Default._DataDirectories.Length + 1);
             foreach (var dir in Default._DataDirectories)
             {
+                if (!Directory.Exists(Path.Combine(Default._JsonConfig["GameLocation"], dir))) continue;
                 string des = Path.Combine(backupDir, dir);
                 MoveDirectory(Path.Combine(Default._JsonConfig["GameLocation"], dir), des);
                 Directory.Delete(Path.Combine(Default._JsonConfig["GameLocation"], dir), true);
@@ -193,8 +195,8 @@ namespace NieR_Replicant_Viet_Hoa
                     progress.Begin();
                     log.Push(Default._Messages["BeginInstall"].Replace("{PatchDirectory}", Default._PatchDirectory), true);
                     Unpacker unpacker = new Unpacker(Default._JsonConfig["GameLocation"]);
-                    unpacker.Unpack(Path.Combine(Default._JsonConfig["GameLocation"], Default._PatchDirectory), "data", progress, log);
-                    unpacker.Unpack(Path.Combine(Default._JsonConfig["GameLocation"], Default._PatchDirectory), @"dlc\dlc01", progress, log);
+                    if (Directory.Exists(Path.Combine(Default._JsonConfig["GameLocation"], @"data"))) unpacker.Unpack(Path.Combine(Default._JsonConfig["GameLocation"], Default._PatchDirectory), "data", progress, log);
+                    if (Directory.Exists(Path.Combine(Default._JsonConfig["GameLocation"], @"dlc\dlc01"))) unpacker.Unpack(Path.Combine(Default._JsonConfig["GameLocation"], Default._PatchDirectory), @"dlc\dlc01", progress, log);
                     string[] movies = Directory.GetFiles(Path.Combine(Default._JsonConfig["GameLocation"], Default._MovieDirectory), "*.arc", SearchOption.TopDirectoryOnly);
                     string[] sounds = Directory.GetFiles(Path.Combine(Default._JsonConfig["GameLocation"], Default._SoundDirectory), "*.pck", SearchOption.TopDirectoryOnly);
                     log.Push(Default._Messages["Begin"].Replace("{Action}", $"sao chép Movie và Sound. Tổng: {movies.Length + sounds.Length} tệp"));
