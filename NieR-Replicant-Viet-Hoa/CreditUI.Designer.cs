@@ -31,23 +31,7 @@ namespace NieR_Replicant_Viet_Hoa
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreditUI));
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.labelRE = new System.Windows.Forms.Label();
-            this.labelTransTitle = new System.Windows.Forms.Label();
-            this.linkDC = new System.Windows.Forms.LinkLabel();
-            this.linkLH = new System.Windows.Forms.LinkLabel();
-            this.linkLH2 = new System.Windows.Forms.LinkLabel();
-            this.labelTesterTitle = new System.Windows.Forms.Label();
-            this.labelProduct = new System.Windows.Forms.Label();
-            this.linkVHG = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,200 +44,21 @@ namespace NieR_Replicant_Viet_Hoa
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
-            // labelTitle
+            // webBrowser
             // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle.Location = new System.Drawing.Point(9, 145);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(265, 15);
-            this.labelTitle.TabIndex = 1;
-            this.labelTitle.Text = "NieR Replicant™ ver.1.22474487139... Việt Hóa";
-            // 
-            // labelRE
-            // 
-            this.labelRE.AutoSize = true;
-            this.labelRE.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRE.Location = new System.Drawing.Point(35, 175);
-            this.labelRE.Name = "labelRE";
-            this.labelRE.Size = new System.Drawing.Size(54, 15);
-            this.labelRE.TabIndex = 2;
-            this.labelRE.Text = "Kỹ Thuật";
-            // 
-            // labelTransTitle
-            // 
-            this.labelTransTitle.AutoSize = true;
-            this.labelTransTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTransTitle.Location = new System.Drawing.Point(165, 175);
-            this.labelTransTitle.Name = "labelTransTitle";
-            this.labelTransTitle.Size = new System.Drawing.Size(90, 15);
-            this.labelTransTitle.TabIndex = 5;
-            this.labelTransTitle.Text = "Dịch / Biên Tập";
-            // 
-            // linkDC
-            // 
-            this.linkDC.AutoSize = true;
-            this.linkDC.Location = new System.Drawing.Point(46, 200);
-            this.linkDC.Name = "linkDC";
-            this.linkDC.Size = new System.Drawing.Size(28, 13);
-            this.linkDC.TabIndex = 8;
-            this.linkDC.TabStop = true;
-            this.linkDC.Text = "[DC]";
-            this.linkDC.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDC_LinkClicked);
-            // 
-            // linkLH
-            // 
-            this.linkLH.AutoSize = true;
-            this.linkLH.Location = new System.Drawing.Point(38, 222);
-            this.linkLH.Name = "linkLH";
-            this.linkLH.Size = new System.Drawing.Size(44, 13);
-            this.linkLH.TabIndex = 9;
-            this.linkLH.TabStop = true;
-            this.linkLH.Text = "Lê Hiếu";
-            this.linkLH.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLH_LinkClicked);
-            // 
-            // linkLH2
-            // 
-            this.linkLH2.AutoSize = true;
-            this.linkLH2.Location = new System.Drawing.Point(182, 209);
-            this.linkLH2.Name = "linkLH2";
-            this.linkLH2.Size = new System.Drawing.Size(44, 13);
-            this.linkLH2.TabIndex = 10;
-            this.linkLH2.TabStop = true;
-            this.linkLH2.Text = "Lê Hiếu";
-            this.linkLH2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLH2_LinkClicked);
-            // 
-            // labelTesterTitle
-            // 
-            this.labelTesterTitle.AutoSize = true;
-            this.labelTesterTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTesterTitle.Location = new System.Drawing.Point(110, 245);
-            this.labelTesterTitle.Name = "labelTesterTitle";
-            this.labelTesterTitle.Size = new System.Drawing.Size(52, 15);
-            this.labelTesterTitle.TabIndex = 12;
-            this.labelTesterTitle.Text = "Soát Lỗi";
-            // 
-            // labelProduct
-            // 
-            this.labelProduct.AutoSize = true;
-            this.labelProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProduct.Location = new System.Drawing.Point(40, 430);
-            this.labelProduct.Name = "labelProduct";
-            this.labelProduct.Size = new System.Drawing.Size(109, 15);
-            this.labelProduct.TabIndex = 13;
-            this.labelProduct.Text = "Một sản phẩm của";
-            // 
-            // linkVHG
-            // 
-            this.linkVHG.AutoSize = true;
-            this.linkVHG.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkVHG.Location = new System.Drawing.Point(146, 430);
-            this.linkVHG.Name = "linkVHG";
-            this.linkVHG.Size = new System.Drawing.Size(90, 15);
-            this.linkVHG.TabIndex = 14;
-            this.linkVHG.TabStop = true;
-            this.linkVHG.Text = "Việt Hóa Game";
-            this.linkVHG.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkVHG_LinkClicked);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 380);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Đây là bản dịch hoàn toàn miễn phí.";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 395);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(261, 13);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Để tránh bị chèn mã độc, vui lòng chỉ tải chương trình";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 410);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(260, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "cài đặt NieR Replicant Việt Hóa tại viethoagame.com";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(125, 270);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(20, 13);
-            this.linkLabel1.TabIndex = 19;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Xu";
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(110, 290);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(53, 13);
-            this.linkLabel2.TabIndex = 20;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Lão Công";
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(117, 330);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(33, 13);
-            this.linkLabel3.TabIndex = 21;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "Kinax";
-            // 
-            // linkLabel4
-            // 
-            this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(110, 310);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(52, 13);
-            this.linkLabel4.TabIndex = 22;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "hieushido";
-            // 
-            // linkLabel5
-            // 
-            this.linkLabel5.AutoSize = true;
-            this.linkLabel5.Location = new System.Drawing.Point(111, 350);
-            this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(45, 13);
-            this.linkLabel5.TabIndex = 23;
-            this.linkLabel5.TabStop = true;
-            this.linkLabel5.Text = "Hải Anh";
+            this.webBrowser.Location = new System.Drawing.Point(3, 144);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(279, 305);
+            this.webBrowser.TabIndex = 24;
+            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
             // 
             // CreditUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 461);
-            this.Controls.Add(this.linkLabel5);
-            this.Controls.Add(this.linkLabel4);
-            this.Controls.Add(this.linkLabel3);
-            this.Controls.Add(this.linkLabel2);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.linkVHG);
-            this.Controls.Add(this.labelProduct);
-            this.Controls.Add(this.labelTesterTitle);
-            this.Controls.Add(this.linkLH2);
-            this.Controls.Add(this.linkLH);
-            this.Controls.Add(this.linkDC);
-            this.Controls.Add(this.labelTransTitle);
-            this.Controls.Add(this.labelRE);
-            this.Controls.Add(this.labelTitle);
+            this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.pictureBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -262,31 +67,15 @@ namespace NieR_Replicant_Viet_Hoa
             this.Name = "CreditUI";
             this.Text = "Thông tin";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreditUI_FormClosing);
+            this.Load += new System.EventHandler(this.CreditUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.Label labelRE;
-        private System.Windows.Forms.Label labelTransTitle;
-        private System.Windows.Forms.LinkLabel linkDC;
-        private System.Windows.Forms.LinkLabel linkLH;
-        private System.Windows.Forms.LinkLabel linkLH2;
-        private System.Windows.Forms.Label labelTesterTitle;
-        private System.Windows.Forms.Label labelProduct;
-        private System.Windows.Forms.LinkLabel linkVHG;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.LinkLabel linkLabel4;
-        private System.Windows.Forms.LinkLabel linkLabel5;
+        private System.Windows.Forms.WebBrowser webBrowser;
     }
 }

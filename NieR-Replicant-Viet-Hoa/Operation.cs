@@ -20,12 +20,6 @@ namespace NieR_Replicant_Viet_Hoa
             psi.FileName = uri;
             Process.Start(psi);
         }
-        public static string GetExceptionMessage(Exception err, string defaultMsg = null)
-        {
-            string errName = err.GetType().Name;
-            if (Default._Messages.ContainsKey(errName)) return Default._Messages[errName];
-            else return defaultMsg;
-        }
         private static void MoveDirectory(string source, string des)
         {
             if (!Directory.Exists(source)) return;
@@ -90,7 +84,7 @@ namespace NieR_Replicant_Viet_Hoa
         public static void Backup(ProgressManager progress, LogManager log)
         {
             progress.Begin();
-            log.Push(Default._Messages["Begin"].Replace("{Action}", "sao lưu"));
+            log.Push(Default._Messages["BeginBackup"]);
             string backupDir = Path.Combine(Default._JsonConfig["GameLocation"], Default._BackupDirectory);
             if (!Directory.Exists(backupDir)) Directory.CreateDirectory(backupDir);
             double percent = 100.0 / (Default._DataDirectories.Length + 1);
@@ -114,7 +108,7 @@ namespace NieR_Replicant_Viet_Hoa
         {
             progress.Begin();
             if (!Directory.Exists(Path.GetDirectoryName(Default._Resources))) Directory.CreateDirectory(Path.GetDirectoryName(Default._Resources));
-            log.Push(Default._Messages["Begin"].Replace("{Action}", "lấy thông tin từ máy chủ"));
+            log.Push(Default._Messages["BeginGetData"]);
             using (var wc = new WebClient())
             {
                 string jsonData = wc.DownloadString(new Uri(Default._Uri));
@@ -141,7 +135,7 @@ namespace NieR_Replicant_Viet_Hoa
                     else
                     {
                         Uri uri = new Uri(json["UpdateUrl"]);
-                        log.Push(Default._Messages["Begin"].Replace("{Action}", "tải chương trình cập nhật"));
+                        log.Push(Default._Messages["DownloadApp"]);
                         await wc.DownloadFileTaskAsync(uri, Default._AppUpdate);
                         Process.Start(Default._AppUpdate);
                         Application.Exit();
@@ -150,9 +144,9 @@ namespace NieR_Replicant_Viet_Hoa
                 if (!Default._JsonConfig.ContainsKey("TranslationID") || json["TranslationID"] != Default._JsonConfig["TranslationID"] || !File.Exists(Default._Resources) || ReadID() != json["TranslationID"])
                 {
                     Uri uri = new Uri(json["TranslationUrl"]);
-                    log.Push(Default._Messages["Begin"].Replace("{Action}", "tải bản dịch"));
+                    log.Push(Default._Messages["DownloadTrans"]);
                     await wc.DownloadFileTaskAsync(uri, Default._Resources);
-                    log.Push(Default._Messages["Complete"].Replace("{Action}", "Tải bản dịch"));
+                    log.Push(Default._Messages["DownloadCompleted"]);
                     if (Default._JsonConfig.ContainsKey("TranslationID")) Default._JsonConfig["TranslationID"] = json["TranslationID"];
                     else Default._JsonConfig.Add("TranslationID", json["TranslationID"]);
                     UpdateConfig();
@@ -199,7 +193,7 @@ namespace NieR_Replicant_Viet_Hoa
                     if (Directory.Exists(Path.Combine(Default._JsonConfig["GameLocation"], @"dlc\dlc01"))) unpacker.Unpack(Path.Combine(Default._JsonConfig["GameLocation"], Default._PatchDirectory), @"dlc\dlc01", progress, log);
                     string[] movies = Directory.GetFiles(Path.Combine(Default._JsonConfig["GameLocation"], Default._MovieDirectory), "*.arc", SearchOption.TopDirectoryOnly);
                     string[] sounds = Directory.GetFiles(Path.Combine(Default._JsonConfig["GameLocation"], Default._SoundDirectory), "*.pck", SearchOption.TopDirectoryOnly);
-                    log.Push(Default._Messages["Begin"].Replace("{Action}", $"sao chép Movie và Sound. Tổng: {movies.Length + sounds.Length} tệp"));
+                    log.Push(Default._Messages["CopyMovieSound"].Replace("{FileCount}", $"{movies.Length + sounds.Length}"));
                     progress.Begin();
                     double percent = 100.0 / (movies.Length + sounds.Length);
                     string moviePath = Path.Combine(Default._JsonConfig["GameLocation"], Default._PatchDirectory, Path.GetFileName(Default._MovieDirectory));
@@ -226,7 +220,7 @@ namespace NieR_Replicant_Viet_Hoa
                 }
                 else
                 {
-                    log.Push(Default._Messages["Cancel"].Replace("{Action}", "cài đặt"));
+                    log.Push(Default._Messages["CancelInstall"]);
                     return false;
                 }
             }
@@ -246,11 +240,11 @@ namespace NieR_Replicant_Viet_Hoa
                     string id = $"{br.ReadInt64()}";
                     if (!Default._JsonConfig.ContainsKey("TranslationID") || id != Default._JsonConfig["TranslationID"])
                     {
-                        log.Push(Default._Messages["Cancel"].Replace("{Action}", "cài đặt"));
+                        log.Push(Default._Messages["CancelInstall"]);
                         throw new Exception(Default._Messages["InvalidID"]);
                     }
                     int fileCount = br.ReadInt32();
-                    log.Push(Default._Messages["Extract"].Replace("{Item}", "bản dịch") + $" Tổng: {fileCount} tệp.");
+                    log.Push(Default._Messages["ExtractTrans"].Replace("{FileCount}", $"{fileCount}"));
                     double percent = 100.0 / fileCount;
                     for (int i = 0; i < fileCount; i++)
                     {
@@ -276,12 +270,12 @@ namespace NieR_Replicant_Viet_Hoa
                     progress.Finish();
                 }
             }
-            log.Push(Default._Messages["Complete"].Replace("{Action}", "Cài đặt"));
+            log.Push(Default._Messages["InstallCompleted"]);
             return true;
         }
         public static bool Uninstall(ProgressManager progress, LogManager log)
         {
-            DialogResult confirm = MessageBox.Show(Default._Messages["Confirm"].Replace("{Action}", "gỡ cài đặt"), Default._MessageTitle, MessageBoxButtons.YesNo);
+            DialogResult confirm = MessageBox.Show(Default._Messages["ConfirmUninstall"], Default._MessageTitle, MessageBoxButtons.YesNo);
             if (confirm == DialogResult.Yes)
             {
                 log.Clear();
@@ -309,7 +303,7 @@ namespace NieR_Replicant_Viet_Hoa
                 Directory.Delete(backupDir, true);
                 progress.Increase(percent);
                 progress.Finish();
-                log.Push(Default._Messages["Complete"].Replace("{Action}", "Gỡ cài đặt"));
+                log.Push(Default._Messages["UninstallCompleted"]);
                 return true;
             }
             else

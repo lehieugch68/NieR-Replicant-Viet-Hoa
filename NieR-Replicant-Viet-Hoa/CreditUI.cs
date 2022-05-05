@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace NieR_Replicant_Viet_Hoa
 {
@@ -39,6 +40,17 @@ namespace NieR_Replicant_Viet_Hoa
         private void linkOb_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Operation.OpenUrl("https://viethoagame.com/members/oblivion.4/");
+        }
+
+        private void CreditUI_Load(object sender, EventArgs e)
+        {
+            webBrowser.ScrollBarsEnabled = false;
+            webBrowser.DocumentText = "";
+        }
+
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            webBrowser.Document.BackColor = this.BackColor;
         }
     }
 }

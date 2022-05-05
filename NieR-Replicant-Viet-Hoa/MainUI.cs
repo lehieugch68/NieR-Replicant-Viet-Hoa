@@ -71,7 +71,7 @@ namespace NieR_Replicant_Viet_Hoa
                     catch (Exception err)
                     {
                         Default._InProgress = false;
-                        MessageBox.Show(Operation.GetExceptionMessage(err, Default._Messages["WriteFailed"]), $"{Default._MessageTitle} - {err.GetType().Name}");
+                        MessageBox.Show(err.Message, Default._MessageTitle);
                     }
                 }
                 Default._InProgress = false;
@@ -86,12 +86,57 @@ namespace NieR_Replicant_Viet_Hoa
             }
             catch (Exception err)
             {
-                MessageBox.Show(Operation.GetExceptionMessage(err, Default._Messages["WriteFailed"]), $"{Default._MessageTitle} - {err.GetType().Name}");
+                MessageBox.Show(err.Message, Default._MessageTitle);
             }
-
             try
             {
                 Default._JsonConfig = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(File.ReadAllText(Default._ConfigFile));
+                if (Directory.Exists(Default._LangDirectory))
+                {
+                    try
+                    {
+                        if (File.Exists(Default._FlagFile))
+                        {
+                            using (FileStream fs = File.OpenRead(Default._FlagFile))
+                            {
+                                using (BinaryReader br = new BinaryReader(fs))
+                                {
+                                    int flagCount = br.ReadInt32();
+                                    for (int i = 0; i < flagCount; i++)
+                                    {
+                                        int flagNameLen = br.ReadInt32();
+                                        string flagName = Encoding.ASCII.GetString(br.ReadBytes(flagNameLen));
+                                        int flagImageLen = br.ReadInt32();
+                                        byte[] flagImage = br.ReadBytes(flagImageLen);
+                                        using (var ms = new MemoryStream(flagImage))
+                                        {
+                                            Default._Flags.Add(flagName, Image.FromStream(ms));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        string[] langs = Directory.GetFiles(Default._LangDirectory, "*.json", SearchOption.TopDirectoryOnly);
+                        foreach (string lang in langs)
+                        {
+                            string content = File.ReadAllText(lang);
+                            dynamic json = new JavaScriptSerializer().Deserialize<dynamic>(content);
+                            Default._Languages.Add($"{json["Language"]}", json);
+                            if (!Default._JsonConfig.ContainsKey("Language") && json["Default"] == true) ChangeLanguage(json);
+                        }
+                        if (Default._JsonConfig.ContainsKey("Language")) ChangeLanguage(Default._Languages[Default._JsonConfig["Language"]]);
+                        ToolStripMenuItem[] items = new ToolStripMenuItem[Default._Languages.Count];
+                        for (int i = 0; i < items.Length; i++)
+                        {
+                            items[i] = new ToolStripMenuItem();
+                            items[i].Name = Default._Languages.ElementAt(i).Key;
+                            items[i].Text = Default._Languages.ElementAt(i).Key;
+                            items[i].Click += new EventHandler(LanguageItemClickHandler);
+                        }
+                        languageToolStripMenuItem.DropDownItems.AddRange(items);
+                    }
+                    catch { }
+                }
                 if (Default._JsonConfig.ContainsKey("GameLocation"))
                 {
                     textBoxGameLocation.Text = Default._JsonConfig["GameLocation"];
@@ -141,7 +186,53 @@ namespace NieR_Replicant_Viet_Hoa
             }
             catch (Exception err)
             {
-                MessageBox.Show(Operation.GetExceptionMessage(err, Default._Messages["ReadFailed"]), $"{Default._MessageTitle} - {err.GetType().Name}");
+                MessageBox.Show(err.Message, Default._MessageTitle);
+            }
+        }
+        private void LanguageItemClickHandler(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
+            dynamic json;
+            if (Default._Languages.TryGetValue(clickedItem.Name, out json))
+            {
+                ChangeLanguage(json);
+                if (!Default._JsonConfig.ContainsKey("Language")) Default._JsonConfig.Add("Language", json["Language"].ToString());
+                else Default._JsonConfig["Language"] = json["Language"].ToString();
+                Operation.UpdateConfig();
+            }
+        }
+        private void ChangeLanguage(dynamic json)
+        {
+            try
+            {
+                Default._Uri = json["Url"].ToString();
+                Default._Resources = Path.Combine(Default._AppDirectory, "Resources", json["Resources"].ToString());
+                Default._PatchDirectory = json["PatchDirectory"].ToString();
+                menuStrip.Items[0].Text = json["Interface"]["Language"].ToString();
+                menuStrip.Items[1].Text = json["Interface"]["Credits"].ToString();
+                Default._CreditForm.Text = json["Interface"]["Credits"].ToString();
+                this.Text = json["Interface"]["ApplicationTitle"].ToString();
+                Default._MessageTitle = json["Interface"]["MessageTitle"].ToString();
+                labelLocation.Text = json["Interface"]["GameLocationLabel"].ToString();
+                btnGameLocation.Text = json["Interface"]["SelectButton"].ToString();
+                btnUpdate.Text = json["Interface"]["UpdateButton"].ToString();
+                btnInstall.Text = json["Interface"]["InstallButton"].ToString();
+                btnUninstall.Text = json["Interface"]["UninstallButton"].ToString();
+                foreach (var message in json["Messages"])
+                {
+                    if (Default._Messages.ContainsKey(message.Key))
+                    {
+                        Default._Messages[message.Key] = message.Value;
+                    }
+                }
+                if (Default._Flags.ContainsKey(json["Language"].ToString()))
+                {
+                    pictureBoxFlag.Image = Default._Flags[json["Language"].ToString()];
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message, Default._MessageTitle);
             }
         }
         private void linkLH_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -253,7 +344,7 @@ namespace NieR_Replicant_Viet_Hoa
 
         private void btnCredit_Click(object sender, EventArgs e)
         {
-            if (!Default._CreditForm.Visible) Default._CreditForm.Show();
+            
         }
 
         private void listBoxLog_MeasureItem(object sender, MeasureItemEventArgs e)
@@ -272,9 +363,14 @@ namespace NieR_Replicant_Viet_Hoa
         {
             try
             {
-                Operation.CheckUpdate(this);
+                //Operation.CheckUpdate(this);
             }
             catch { }
+        }
+
+        private void creditsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Default._CreditForm.Visible) Default._CreditForm.Show();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace NieR_Replicant_Viet_Hoa
@@ -10,16 +11,18 @@ namespace NieR_Replicant_Viet_Hoa
     public class Default
     {
         public static readonly string _AppDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        public static readonly string _LangDirectory = Path.Combine(_AppDirectory, "Language");
+        public static readonly string _FlagFile = Path.Combine(_AppDirectory, "Language", "flags.bin");
         public static readonly string _ConfigFile = Path.Combine(_AppDirectory, "Config", "config.json");
-        public static readonly string _Resources = Path.Combine(_AppDirectory, "Resources", "[VietHoaGame.com]_NieR_Replicant_Viet_Hoa.bin");
-        public static readonly string _PatchDirectory = "VietHoaGame";
-        public static readonly string _MessageTitle = "NieR Replicant Việt Hóa";
         public static readonly string _MovieDirectory = @"data\movie";
         public static readonly string _SoundDirectory = @"data\sound";
         public static readonly string _BackupDirectory = "Backup";
         public static readonly string _ExeFile = "NieR Replicant ver.1.22474487139.exe";
         public static readonly string _AppUpdate = Path.Combine(_AppDirectory, "NieR Replicant Update.exe");
-        public static readonly string _Uri = "https://lehieugch68.github.io/NieRReplicant/translation.json";
+        public static string _Uri = "https://lehieugch68.github.io/NieRReplicant/translation.json";
+        public static string _Resources = Path.Combine(_AppDirectory, "Resources", "[VietHoaGame.com]_NieR_Replicant_Viet_Hoa.bin");
+        public static string _PatchDirectory = "VietHoaGame";
+        public static string _MessageTitle = "NieR Replicant Translation";
         public static readonly string[] _DataDirectories = new string[]
         {
             "data", "dlc"
@@ -36,12 +39,12 @@ namespace NieR_Replicant_Viet_Hoa
         };
         public static readonly string _ExeAssetsPath = "../build_assets/rom/pc/";
         public static Form _CreditForm = new CreditUI();
+        public static Dictionary<string, dynamic> _Languages = new Dictionary<string, dynamic>();
+        public static Dictionary<string, Image> _Flags = new Dictionary<string, Image>();
         #region Messages
         public static Dictionary<string, string> _Messages = new Dictionary<string, string>()
         {
             { "GameLocation", "NieR Replicant ver.1.22474487139" },
-            { "WriteFailed", "Đã xảy ra lỗi: Không thể ghi tệp.\n\nCó thể bạn đang cài đặt trên thư mục Read-Only hoặc chương trình thiếu quyền truy cập. Vui lòng kiểm tra thư mục hoặc chạy chương trình dưới quyền Admin." },
-            { "ReadFailed", "Đã xảy ra lỗi: Không thể đọc tệp.\n\nCó thể bạn đang cài đặt trên thư mục chương trình thiếu quyền truy cập. Vui lòng kiểm tra thư mục hoặc chạy chương trình dưới quyền Admin." },
             { "JsonException", "Đã xảy ra lỗi: Không thể đọc tệp JSON.\n\nCó thể tệp JSON đã bị hỏng hoặc bạn đã thay đổi nội dung tệp đó. Bạn có thể xóa tệp JSON cũ để bỏ qua thông báo này." },
             { "UnsupportedFormat", "Đã xảy ra lỗi: Tệp hỏng hoặc không hỗ trợ.\n\nVui lòng xem lại đường dẫn, tải tệp bị hỏng hoặc cài lại trò chơi." },
             { "NotFound", "Đã xảy ra lỗi: Không tìm thấy tệp.\n\nVui lòng xem lại đường dẫn, tải tệp bị thiếu hoặc cài lại trò chơi." },
@@ -51,12 +54,20 @@ namespace NieR_Replicant_Viet_Hoa
             { "BeginInstall", "Bắt đầu cài đặt, vui lòng không tắt chương trình.\nNếu gặp sự cố hoặc tắt chương trình đột ngột, hãy xóa thư mục {PatchDirectory} và cài đặt lại.\nBản dịch được thực hiện bởi Việt Hóa Game và hoàn toàn miễn phí. Vui lòng chỉ tải chương trình ở viethoagame.com để tránh bị chèn mã độc." },
             { "BeginUninstall", "Bắt đầu gỡ cài đặt, vui lòng không tắt chương trình." },
             { "UnpackData", "Đang giải nén {Item}. Tổng: {FileCount} tệp." },
-            { "Cancel", "Dừng {Action}." },
+            { "BeginBackup", "Đang sao lưu." },
+            { "BeginGetData", "Cập nhập thông tin từ máy chủ." },
+            { "CancelInstall", "Đã hủy cài đặt." },
+            { "CancelUninstall", "Đã hủy gỡ cài đặt." },
+            { "DownloadApp", "Đang tải ứng dụng." },
+            { "DownloadTrans", "Đang tải bản dịch." },
             { "Extract", "Giải nén {Item}." },
-            { "Complete", "{Action} thành công." },
-            { "Begin", "Đang {Action}." },
+            { "ExtractTrans", "Giải nén bản dịch. Tổng: {FileCount} tệp." },
+            { "DownloadCompleted", "Tải thành công." },
+            { "InstallCompleted", "Cài đặt thành công." },
+            { "UninstallCompleted", "Gỡ Việt Hóa thành công." },
+            { "CopyMovieSound", "Đang sao chép Movie và Sound. Tổng: {FileCount} tệp." },
             { "PatchExe", "Đang cập nhật tệp EXE." },
-            { "Confirm", "Bạn có chắc muốn {Action}?" },
+            { "ConfirmUninstall", "Bạn có chắc muốn gỡ cài đặt?" },
             { "BinNotFound", "Đã xảy ra lỗi: Không tìm thấy tệp BIN.\n\nVui lòng cập nhật bản dịch." },
             { "LocationException", "Đã xảy ra lỗi: Không tìm thấy thư mục game.\n\nVui lòng chọn đúng thư mục game." },
             { "InProgress", "Đã xảy ra lỗi: Đang dở tiến trình khác.\n\nVui lòng đợi." },
