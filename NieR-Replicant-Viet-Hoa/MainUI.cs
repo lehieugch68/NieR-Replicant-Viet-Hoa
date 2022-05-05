@@ -237,7 +237,7 @@ namespace NieR_Replicant_Viet_Hoa
         }
         private void linkLH_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Operation.OpenUrl("https://www.facebook.com/100004440041815");
+            Operation.OpenUrl("https://github.com/lehieugch68");
         }
         private void linkVHG_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -266,7 +266,7 @@ namespace NieR_Replicant_Viet_Hoa
                     {
                         Default._InProgress = false;
                         MessageBox.Show(err.Message, Default._MessageTitle);
-                        listBoxLog.Items.Add(Default._Messages["Cancel"].Replace("{Action}", "cập nhật"));
+                        listBoxLog.Items.Add(Default._Messages["CancelUpdate"]);
                     }
                 }).GetAwaiter().OnCompleted(() => { 
                     Default._InProgress = false;
@@ -297,7 +297,7 @@ namespace NieR_Replicant_Viet_Hoa
                         {
                             Default._InProgress = false;
                             MessageBox.Show(err.Message, Default._MessageTitle);
-                            listBoxLog.Items.Add(Default._Messages["Cancel"].Replace("{Action}", "gỡ cài đặt"));
+                            listBoxLog.Items.Add(Default._Messages["CancelUninstall"]);
                         }
                     }).GetAwaiter().OnCompleted(() => { Default._InProgress = false; });
                 }
@@ -331,7 +331,7 @@ namespace NieR_Replicant_Viet_Hoa
                         {
                             Default._InProgress = false;
                             MessageBox.Show(err.Message, Default._MessageTitle);
-                            listBoxLog.Items.Add(Default._Messages["Cancel"].Replace("{Action}", "cài đặt"));
+                            listBoxLog.Items.Add(Default._Messages["CancelInstall"]);
                         }
                     }).GetAwaiter().OnCompleted(() => { Default._InProgress = false; }); ;
                 }

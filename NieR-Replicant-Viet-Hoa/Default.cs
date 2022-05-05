@@ -57,6 +57,7 @@ namespace NieR_Replicant_Viet_Hoa
             { "BeginBackup", "Đang sao lưu." },
             { "BeginGetData", "Cập nhập thông tin từ máy chủ." },
             { "CancelInstall", "Đã hủy cài đặt." },
+            { "CancelUpdate", "Đã hủy cập nhật." },
             { "CancelUninstall", "Đã hủy gỡ cài đặt." },
             { "DownloadApp", "Đang tải ứng dụng." },
             { "DownloadTrans", "Đang tải bản dịch." },
