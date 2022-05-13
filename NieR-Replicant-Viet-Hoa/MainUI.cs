@@ -364,6 +364,7 @@ namespace NieR_Replicant_Viet_Hoa
             try
             {
                 //Operation.CheckUpdate(this);
+                
             }
             catch { }
         }

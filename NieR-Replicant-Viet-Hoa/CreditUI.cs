@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Text;
+using System.Net;
 
 namespace NieR_Replicant_Viet_Hoa
 {
@@ -45,12 +47,34 @@ namespace NieR_Replicant_Viet_Hoa
         private void CreditUI_Load(object sender, EventArgs e)
         {
             webBrowser.ScrollBarsEnabled = false;
-            webBrowser.DocumentText = "";
+            using (WebClient wc = new WebClient())
+            {
+                try
+                {
+                    string cretits = Encoding.UTF8.GetString(wc.DownloadData(new Uri(Default._Credits)));
+                    webBrowser.DocumentText = cretits;
+                } 
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             webBrowser.Document.BackColor = this.BackColor;
+        }
+
+        private void webBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            if (e.Url.OriginalString.StartsWith("about:"))
+            {
+                return;
+            }
+            e.Cancel = true;
+            Operation.OpenUrl(e.Url.ToString());
+            
         }
     }
 }

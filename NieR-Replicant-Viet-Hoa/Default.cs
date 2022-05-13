@@ -20,6 +20,7 @@ namespace NieR_Replicant_Viet_Hoa
         public static readonly string _ExeFile = "NieR Replicant ver.1.22474487139.exe";
         public static readonly string _AppUpdate = Path.Combine(_AppDirectory, "NieR Replicant Update.exe");
         public static string _Uri = "https://lehieugch68.github.io/NieRReplicant/translation.json";
+        public static string _Credits = "https://lehieugch68.github.io/NieRReplicant/credits.html";
         public static string _Resources = Path.Combine(_AppDirectory, "Resources", "[VietHoaGame.com]_NieR_Replicant_Viet_Hoa.bin");
         public static string _PatchDirectory = "VietHoaGame";
         public static string _MessageTitle = "NieR Replicant Translation";
@@ -45,7 +46,6 @@ namespace NieR_Replicant_Viet_Hoa
         public static Dictionary<string, string> _Messages = new Dictionary<string, string>()
         {
             { "GameLocation", "NieR Replicant ver.1.22474487139" },
-            { "JsonException", "Đã xảy ra lỗi: Không thể đọc tệp JSON.\n\nCó thể tệp JSON đã bị hỏng hoặc bạn đã thay đổi nội dung tệp đó. Bạn có thể xóa tệp JSON cũ để bỏ qua thông báo này." },
             { "UnsupportedFormat", "Đã xảy ra lỗi: Tệp hỏng hoặc không hỗ trợ.\n\nVui lòng xem lại đường dẫn, tải tệp bị hỏng hoặc cài lại trò chơi." },
             { "NotFound", "Đã xảy ra lỗi: Không tìm thấy tệp.\n\nVui lòng xem lại đường dẫn, tải tệp bị thiếu hoặc cài lại trò chơi." },
             { "InvalidID", "Đã xảy ra lỗi: ID không hợp lệ.\n\nVui lòng cập nhật bản dịch." },
@@ -76,8 +76,8 @@ namespace NieR_Replicant_Viet_Hoa
             { "AppVersion", "Phiên bản chương trình: {Version}" },
             { "UpdateTime", "Cập nhật ngày: {Date}."},
             { "UpToDate", "Cả chương trình và bản dịch đang ở bản mới nhất." },
-            { "UpdateApp", "Đã có phiên bản chương trình mới. Bạn muốn cập nhật chứ?" },
-            { "UpdateTrans", "Đã có bản dịch mới. Bạn muốn cập nhật chứ?" },
+            { "ConfirmUpdateApp", "Đã có phiên bản chương trình mới. Bạn muốn cập nhật chứ?" },
+            { "ConfirmUpdateTrans", "Đã có bản dịch mới. Bạn muốn cập nhật chứ?" },
             { "Changelog", "\n\nThay đổi:\n" },
         };
         #endregion

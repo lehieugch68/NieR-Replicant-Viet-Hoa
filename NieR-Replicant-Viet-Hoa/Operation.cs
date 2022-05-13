@@ -44,7 +44,7 @@ namespace NieR_Replicant_Viet_Hoa
                 wc.DownloadStringCompleted += (s, y) =>
                 {
                     Dictionary<string, string> json = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(y.Result);
-                    string updateMessage = Default._Messages["UpdateTrans"];
+                    string updateMessage = Default._Messages["ConfirmUpdateTrans"];
                     if (json.ContainsKey("Changelog")) updateMessage = $"{updateMessage}{Default._Messages["Changelog"]}{json["Changelog"]}";
                     if (!Default._JsonConfig.ContainsKey("TranslationID"))
                     {
@@ -56,7 +56,7 @@ namespace NieR_Replicant_Viet_Hoa
                     }
                     else
                     {
-                        string appUpdateMessage = Default._Messages["UpdateApp"];
+                        string appUpdateMessage = Default._Messages["ConfirmUpdateApp"];
                         if (json.ContainsKey("AppChangelog")) appUpdateMessage = $"{appUpdateMessage}{Default._Messages["Changelog"]}{json["AppChangelog"]}";
                         if (json.ContainsKey("AppVersion") && Application.ProductVersion != json["AppVersion"])
                         {
