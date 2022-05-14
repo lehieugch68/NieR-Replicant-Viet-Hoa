@@ -208,6 +208,7 @@ namespace NieR_Replicant_Viet_Hoa
                 Default._Uri = json["Url"].ToString();
                 Default._Resources = Path.Combine(Default._AppDirectory, "Resources", json["Resources"].ToString());
                 Default._PatchDirectory = json["PatchDirectory"].ToString();
+                Default._WebUrl = json["WebUrl"].ToString();
                 menuStrip.Items[0].Text = json["Interface"]["Language"].ToString();
                 menuStrip.Items[1].Text = json["Interface"]["Credits"].ToString();
                 Default._CreditForm.Text = json["Interface"]["Credits"].ToString();
@@ -218,6 +219,7 @@ namespace NieR_Replicant_Viet_Hoa
                 btnUpdate.Text = json["Interface"]["UpdateButton"].ToString();
                 btnInstall.Text = json["Interface"]["InstallButton"].ToString();
                 btnUninstall.Text = json["Interface"]["UninstallButton"].ToString();
+                
                 foreach (var message in json["Messages"])
                 {
                     if (Default._Messages.ContainsKey(message.Key))
@@ -241,7 +243,7 @@ namespace NieR_Replicant_Viet_Hoa
         }
         private void linkVHG_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Operation.OpenUrl("https://viethoagame.com/threads/pc-nier-replicant-ver-1-22474487139-viet-hoa.305/");
+            Operation.OpenUrl(Default._WebUrl);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)

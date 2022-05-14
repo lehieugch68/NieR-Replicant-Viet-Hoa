@@ -11,8 +11,8 @@ namespace NieR_Replicant_Viet_Hoa
     public class Default
     {
         public static readonly string _AppDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        public static readonly string _LangDirectory = Path.Combine(_AppDirectory, "Language");
-        public static readonly string _FlagFile = Path.Combine(_AppDirectory, "Language", "flags.bin");
+        public static readonly string _LangDirectory = Path.Combine(_AppDirectory, "Languages");
+        public static readonly string _FlagFile = Path.Combine(_AppDirectory, "Languages", "flags.bin");
         public static readonly string _ConfigFile = Path.Combine(_AppDirectory, "Config", "config.json");
         public static readonly string _MovieDirectory = @"data\movie";
         public static readonly string _SoundDirectory = @"data\sound";
@@ -21,6 +21,7 @@ namespace NieR_Replicant_Viet_Hoa
         public static readonly string _AppUpdate = Path.Combine(_AppDirectory, "NieR Replicant Update.exe");
         public static string _Uri = "https://lehieugch68.github.io/NieRReplicant/translation.json";
         public static string _Credits = "https://lehieugch68.github.io/NieRReplicant/credits.html";
+        public static string _WebUrl = "https://viethoagame.com/threads/pc-nier-replicant-ver-1-22474487139-viet-hoa.305/";
         public static string _Resources = Path.Combine(_AppDirectory, "Resources", "[VietHoaGame.com]_NieR_Replicant_Viet_Hoa.bin");
         public static string _PatchDirectory = "VietHoaGame";
         public static string _MessageTitle = "NieR Replicant Translation";

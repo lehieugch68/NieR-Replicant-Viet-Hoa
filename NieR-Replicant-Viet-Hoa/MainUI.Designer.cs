@@ -130,12 +130,12 @@ namespace NieR_Replicant_Viet_Hoa
             // linkVHG
             // 
             this.linkVHG.AutoSize = true;
-            this.linkVHG.Location = new System.Drawing.Point(343, 434);
+            this.linkVHG.Location = new System.Drawing.Point(376, 434);
             this.linkVHG.Name = "linkVHG";
-            this.linkVHG.Size = new System.Drawing.Size(79, 13);
+            this.linkVHG.Size = new System.Drawing.Size(46, 13);
             this.linkVHG.TabIndex = 9;
             this.linkVHG.TabStop = true;
-            this.linkVHG.Text = "Việt Hóa Game";
+            this.linkVHG.Text = "Website";
             this.linkVHG.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkVHG_LinkClicked);
             // 
             // labelLocation
